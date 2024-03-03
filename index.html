@@ -73,8 +73,8 @@
                         <p class="text-[#FFFFFFCC] text-xl font-normal text-center lg:text-left lg:w-80 mb-8">Share your favorite opinion and win and wp forum coffee mug!</p>
                         <div class="lg:w-96">
                             <label class="input input-bordered flex items-center gap-2 rounded-full">
-                                <input type="text" class="grow" placeholder="Search here anything" />
-                                <span class="badge badge-info px-6 py-4"><button class="text-xl font-bold text-white font-mulish">Search</button></span>
+                                <input id="search-input-field" type="text" class="grow" placeholder="Search here anything" />
+                                <span class="badge badge-info px-6 py-4"><button onclick="searchPost()" class="text-xl font-bold text-white font-mulish">Search</button></span>
                               </label>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                 <p class="text-[#12132D99] text-lg font-normal font-inter">Yes, you can run unit tests and view the results directly within the app. The integrated testing features allow for a streamlined .</p>
             </div>
         </section>
-        <section>
+        <section class="mb-24">
             <div class="flex flex-col lg:flex-row gap-6">
                 <div id="posts-container" class="lg:w-2/3">
                     
@@ -147,19 +147,27 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="flex justify-between items-center shadow-md p-3 rounded-2xl mt-3 bg-white ">
-                            <div class="w-44">
-                                <p class="text-[#12132D] text-base font-bold font-mulish">10 Kids Unaware of Their Costume</p>
-                            </div>
-                            <div>
-                                <img src="./images/view.png" alt="">
-                            </div>
-                            <div>
-                                <p class="text-[#12132D99] text-base font-medium font-mulish">1568</p>
-                            </div>
-                        </div> -->
+                       
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="mb-24">
+            <div class="flex items-center justify-between px-28 pt-20 bg-[#12132D] rounded-3xl">
+                <div>
+                    <h2 class=" text-white text-5xl font-extrabold font-inter mb-8">Join Our Forum</h2>
+                    <p class="w-[600px] text-[#FFFFFFCC] text-base font-medium font-mulish mb-8">Share your favorite opinion and win and wp forum coffee mug! Yes, you can run unit tests and view the results directly within the app. </p>
+                    <button class="btn bg-[#797DFC] text-white text-xl font-bold font-mulish rounded-full px-6 pt-2 pb-3">Registered Now</button>
+                </div>
+                <div>
+                    <img src="./images/joinforum.png" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="discuss-title-section">
+            <div class="w-1/2 mx-auto text-center mb-12">
+                <h2 class="text-4xl font-extrabold font-mulish mb-6">Latest Posts</h2>
+                <p class="text-[#12132D99] text-lg font-normal font-inter">Yes, you can run unit tests and view the results directly within the app. The integrated testing features allow for a streamlined .</p>
             </div>
         </section>
     </main>

@@ -1,13 +1,16 @@
-const postsUrl='https://openapi.programming-hero.com/api/retro-forum/posts';
+// const postsUrl='https://openapi.programming-hero.com/api/retro-forum/posts';
 
 const postContainer=document.getElementById('posts-container');
 const selectedPostContainer=document.getElementById('selected-post-container');
 const totalPostCounter=document.getElementById('total-post-counter');
 
+
 let countPost=1;
 
-const loadPosts=()=>{
-    fetch(postsUrl)
+const loadPosts=(searchValue)=>{
+    postContainer.textContent='';
+    let url=searchValue?`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`:'https://openapi.programming-hero.com/api/retro-forum/posts'
+    fetch(url)
     .then(res=>res.json())
     .then(data=>{
         console.log(data);
@@ -16,6 +19,8 @@ const loadPosts=()=>{
         displayPosts(postsArray);
     })
 }
+
+
 const displayPosts=(arrayOfPosts)=>{
     arrayOfPosts.forEach(post => {
         console.log(post);
@@ -92,10 +97,8 @@ const selectedPost=(getTitle,getViewCount)=>{
     <div class="w-44">
         <p class="text-[#12132D] text-base font-bold font-mulish">${getTitle}</p>
     </div>
-    <div>
+    <div class="flex gap-3">
         <img src="./images/view.png" alt="">
-    </div>
-    <div>
         <p class="text-[#12132D99] text-base font-medium font-mulish">${getViewCount}</p>
     </div>
     `
@@ -105,4 +108,13 @@ const selectedPost=(getTitle,getViewCount)=>{
     totalPostCounter.innerText=totalCount
 }
 
+
+const searchPost=()=>{
+    // console.log('Search done');
+    const searchInputField=document.getElementById('search-input-field');
+    const inputValue=searchInputField.value.toLowerCase();
+    console.log(inputValue);
+    loadPosts(inputValue)
+    inputValue='';
+}
 loadPosts();
