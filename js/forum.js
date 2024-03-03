@@ -83,6 +83,8 @@ const displayPosts=(arrayOfPosts)=>{
         `;
         postContainer.appendChild(postCard);
     });
+    // toggleLoadingSpinner(false);
+    // toggleLoadingSpinnerWithTimeout(false)
 }
 
 const selectedPost=(getTitle,getViewCount)=>{
@@ -109,12 +111,31 @@ const selectedPost=(getTitle,getViewCount)=>{
 
 const searchPost=()=>{
     // console.log('Search done');
+    // toggleLoadingSpinner(true);
+    toggleLoadingSpinnerWithTimeout(true);
     const searchInputField=document.getElementById('search-input-field');
     const inputValue=searchInputField.value.toLowerCase();
     console.log(inputValue);
     loadPosts(inputValue)
     inputValue='';
 }
+
+const toggleLoadingSpinner=(isLoading)=>{
+    const loadingSpinner=document.getElementById('loading-spinner');
+    if(isLoading){
+        loadingSpinner.classList.remove('hidden');
+    }
+    else{
+        loadingSpinner.classList.add('hidden')
+    }
+}
+const toggleLoadingSpinnerWithTimeout = (isLoading) => {
+    toggleLoadingSpinner(isLoading);
+    setTimeout(() => {
+        toggleLoadingSpinner(false);
+    }, 2000); // Timeout duration in milliseconds (2 seconds)
+}
+
 fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
 .then(res => res.json())
 .then(data => {
