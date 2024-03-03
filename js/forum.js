@@ -3,6 +3,7 @@
 const postContainer=document.getElementById('posts-container');
 const selectedPostContainer=document.getElementById('selected-post-container');
 const totalPostCounter=document.getElementById('total-post-counter');
+const latestPostCardContainer=document.getElementById('latest-post-card-container');
 
 
 let countPost=1;
@@ -13,9 +14,7 @@ const loadPosts=(searchValue)=>{
     fetch(url)
     .then(res=>res.json())
     .then(data=>{
-        console.log(data);
         const postsArray=data.posts;
-        console.log(postsArray);
         displayPosts(postsArray);
     })
 }
@@ -23,10 +22,9 @@ const loadPosts=(searchValue)=>{
 
 const displayPosts=(arrayOfPosts)=>{
     arrayOfPosts.forEach(post => {
-        console.log(post);
 
         const postCard=document.createElement('div');
-        postCard.classList=`flex flex-col lg:flex-row gap-6 p-10  mb-6 rounded-2xl bg-[#F3F3F5] shadow-lg`;
+        postCard.classList=`flex flex-col lg:flex-row gap-6 p-10  mb-6 rounded-2xl bg-[#F3F3F5] shadow-lg hover:bg-[#797DFC1A] border-2 border-[#797DFC1A]`;
         postCard.innerHTML=`
 
         <div class="relative">
@@ -117,4 +115,46 @@ const searchPost=()=>{
     loadPosts(inputValue)
     inputValue='';
 }
+fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
+.then(res => res.json())
+.then(data => {
+    const latestPost=data;
+    loadLatestPostCardData(latestPost)
+})
+
+const loadLatestPostCardData=(cardData)=>{
+    cardData.forEach(latestData => {
+        console.log(latestData);
+
+        const latestPostCard=document.createElement('div');
+        latestPostCard.classList=`card  bg-base-100 shadow-2xl`;
+        latestPostCard.innerHTML=`
+        <figure class="p-8"><img class="rounded-xl" src="${latestData.cover_image}" alt="Shoes" /></figure>
+        <div class="card-body">
+            <div class="flex gap-2">
+                <div>
+                    <img src="./images/date.png" alt="">
+                </div>
+                <div>
+                    <p class="text-[#12132D99] text-base font-medium font-mulish">${latestData?.author?.posted_date || 'No publish date'}</p>
+                </div>
+            </div>
+            <h2 class="card-title font-mulish text-[#12132D] text-lg font-extrabold">${latestData.title
+            }</h2>
+            <p class="text-[#12132D99] text-base font-medium font-mulish">${latestData.description}</p>
+            <div class="card-actions justify-start items-center">
+            <div class="w-20">
+                <img class="rounded-full" src="${latestData.profile_image}" alt="">
+            </div>
+            <div>
+                <h4 class="text-[#12132D] text-base font-extrabold font-mulish">${latestData.author.name}</h4>
+                <p class="text-[#12132D99] text-base font-normal font-mulish">${latestData?.author?.designation || 'Unknown'}</p>
+            </div>
+            </div>
+        </div>
+        `
+        latestPostCardContainer.appendChild(latestPostCard);
+    });
+}
+
 loadPosts();
