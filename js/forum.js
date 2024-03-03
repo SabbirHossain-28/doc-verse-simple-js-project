@@ -124,7 +124,6 @@ fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
 
 const loadLatestPostCardData=(cardData)=>{
     cardData.forEach(latestData => {
-        console.log(latestData);
 
         const latestPostCard=document.createElement('div');
         latestPostCard.classList=`card  bg-base-100 shadow-2xl`;
