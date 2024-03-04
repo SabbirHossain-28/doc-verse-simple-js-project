@@ -110,7 +110,6 @@ const searchPost = () => {
     toggleLoadingSpinner(true);
     const searchInputField = document.getElementById('search-input-field');
     const inputValue = searchInputField.value.toLowerCase();
-    console.log(inputValue);
     
     // Delay before loading posts
     setTimeout(() => {
