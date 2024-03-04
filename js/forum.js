@@ -83,12 +83,9 @@ const displayPosts=(arrayOfPosts)=>{
         `;
         postContainer.appendChild(postCard);
     });
-    // toggleLoadingSpinner(false);
-    // toggleLoadingSpinnerWithTimeout(false)
 }
 
 const selectedPost=(getTitle,getViewCount)=>{
-    // console.log(getId);
     console.log(getTitle);
     console.log(getViewCount);
     const selectedPost=document.createElement('div');
@@ -109,16 +106,20 @@ const selectedPost=(getTitle,getViewCount)=>{
 }
 
 
-const searchPost=()=>{
-    // console.log('Search done');
-    // toggleLoadingSpinner(true);
-    toggleLoadingSpinnerWithTimeout(true);
-    const searchInputField=document.getElementById('search-input-field');
-    const inputValue=searchInputField.value.toLowerCase();
+const searchPost = () => {
+    toggleLoadingSpinner(true);
+    const searchInputField = document.getElementById('search-input-field');
+    const inputValue = searchInputField.value.toLowerCase();
     console.log(inputValue);
-    loadPosts(inputValue)
-    inputValue='';
+    
+    // Delay before loading posts
+    setTimeout(() => {
+        loadPosts(inputValue);
+        toggleLoadingSpinner(false);
+        inputValue.value = ''
+    }, 2000); 
 }
+
 
 const toggleLoadingSpinner=(isLoading)=>{
     const loadingSpinner=document.getElementById('loading-spinner');
@@ -129,12 +130,9 @@ const toggleLoadingSpinner=(isLoading)=>{
         loadingSpinner.classList.add('hidden')
     }
 }
-const toggleLoadingSpinnerWithTimeout = (isLoading) => {
-    toggleLoadingSpinner(isLoading);
-    setTimeout(() => {
-        toggleLoadingSpinner(false);
-    }, 2000); // Timeout duration in milliseconds (2 seconds)
-}
+setTimeout(() => {
+    toggleLoadingSpinner(false);
+}, 2000);
 
 fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
 .then(res => res.json())
