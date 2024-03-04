@@ -116,7 +116,7 @@ const searchPost = () => {
     setTimeout(() => {
         loadPosts(inputValue);
         toggleLoadingSpinner(false);
-        inputValue.value = ''
+        inputValue.value = '';
     }, 2000); 
 }
 
