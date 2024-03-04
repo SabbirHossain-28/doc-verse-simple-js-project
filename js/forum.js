@@ -8,15 +8,29 @@ const latestPostCardContainer=document.getElementById('latest-post-card-containe
 
 let countPost=1;
 
-const loadPosts=(searchValue)=>{
-    postContainer.textContent='';
-    let url=searchValue?`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`:'https://openapi.programming-hero.com/api/retro-forum/posts'
+const loadPosts = (searchValue) => {
+    postContainer.textContent = '';
+
+    let url = searchValue ? `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}` : 'https://openapi.programming-hero.com/api/retro-forum/posts';
+
     fetch(url)
-    .then(res=>res.json())
-    .then(data=>{
-        const postsArray=data.posts;
-        displayPosts(postsArray);
-    })
+        .then(res => res.json())
+        .then(data => {
+            const postsArray = data.posts;
+
+            if (postsArray.length === 0) {
+                displayErrorMessage("No posts found matching the search criteria.");
+            } else {
+                displayPosts(postsArray);
+            }
+        })
+}
+
+const displayErrorMessage = (message) => {
+    const errorMessageElement = document.createElement('div');
+    errorMessageElement.classList.add('text-red-600','text-xl','font-bold','font-mulish','text-center')
+    errorMessageElement.textContent = message;
+    postContainer.appendChild(errorMessageElement);
 }
 
 
